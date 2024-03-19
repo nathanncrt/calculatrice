@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculatrice.MainPage"
+             xmlns:Local="clr-namespace:Calculatrice.ViewModel" 
+             x:DataType="Local:VMCalculatrice">
+
+    <ContentPage.BindingContext>
+        <Local:VMCalculatrice/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Local:ConvertStringToInt x:Key="StringToInt"/>
+
+        <ResourceDictionary>
+            <Style x:Key="StyleChiffre" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="TextColor" Value="Black"  />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style x:Key="StyleOperateur" TargetType="Button" BasedOn="{StaticResource StyleChiffre}">
+                <Setter Property="BackgroundColor" Value="Orange" />
+            </Style>
+
+            <Style x:Key="Clear" TargetType="Button" BasedOn="{StaticResource StyleChiffre}">
+                <Setter Property="BackgroundColor" Value="DarkGray" />
+            </Style>
+
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="24" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView BackgroundColor="Gray" Padding="10">
+        <Grid ColumnSpacing="10" RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Resultat}" Grid.ColumnSpan="4" Style="{StaticResource LabelStyle}"></Label>
+            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Operations}" Grid.ColumnSpan="4" Style="{StaticResource LabelStyle}"></Label>
+
+            <Button Grid.Row="2" Grid.Column="0" Text="7" Style="{StaticResource StyleChiffre}" Command="{Binding AddDigitCommand}" CommandParameter="7">
+            </Button>
+
+            <Button Grid.Row="2" Grid.Column="1" Text="8" Style="{StaticResource StyleChiffre}" Command="{Binding AddDigitCommand}" CommandParameter="8">
+            </Button>
+
+            <Button Grid.Row="2" Grid.Column="2" Text="9" Style="{StaticResource StyleChiffre}" Command="{Binding AddDigitCommand}" CommandParameter="9">
+            </Button>
+
+            <Button Grid.Row="2" Grid.Column="3" Text="/" Style="{StaticResource StyleOperateur}" Command="{Binding AddOperatorCommand}" CommandParameter="{Binding Source={RelativeSource Mode=Self}, Path=Text}" />
+
+            <Button Grid.Row="3" Grid.Column="0" Text="4" Style="{StaticResource StyleChiffre}" Command="{Binding AddDigitCommand}" CommandParameter="4">
+            </Button>
+
+            <Button Grid.Row="3" Grid.Column="1" Text="5" Style="{StaticResource StyleChiffre}" Command="{Binding AddDigitCommand}" CommandParameter="5">
+            </Button>
+
+            <Button Grid.Row="3" Grid.Column="2" Text="6" Style="{StaticResource StyleChiffre}" Command="{Binding AddDigitCommand}" CommandParameter="6">
+            </Button>
+
+            <Button Grid.Row="3" Grid.Column="3" Text="x" Style="{StaticResource StyleOperateur}" Command="{Binding AddOperatorCommand}" CommandParameter="{Binding Source={RelativeSource Mode=Self}, Path=Text}"/>
+
+            <Button Grid.Row="4" Grid.Column="0" Text="1" Style="{StaticResource StyleChiffre}" Command="{Binding AddDigitCommand}" CommandParameter="1">
+            </Button>
+
+            <Button Grid.Row="4" Grid.Column="1" Text="2" Style="{StaticResource StyleChiffre}" Command="{Binding AddDigitCommand}" CommandParameter="2">
+            </Button>
+
+            <Button Grid.Row="4" Grid.Column="2" Text="3" Style="{StaticResource StyleChiffre}" Command="{Binding AddDigitCommand}" CommandParameter="3">
+            </Button>
+
+            <Button Grid.Row="4" Grid.Column="3" Text="-" Style="{StaticResource StyleOperateur}"  Command="{Binding AddOperatorCommand}" CommandParameter="{Binding Source={RelativeSource Mode=Self}, Path=Text}"/>
+
+            <Button Grid.Row="5" Grid.Column="0" Text="0" Grid.ColumnSpan="3" Style="{StaticResource StyleChiffre}" Command="{Binding AddDigitCommand}" CommandParameter="0">
+            </Button>
+
+            <Button Grid.Row="5" Grid.Column="3" Text="+" Style="{StaticResource StyleOperateur}" Command="{Binding AddOperatorCommand}" CommandParameter="{Binding Source={RelativeSource Mode=Self}, Path=Text}" />
+
+            <Button Grid.Row="6" Grid.Column="0" Text="C" Style="{StaticResource Clear}" Command="{Binding ResetCommand}" />
+            <Button Grid.Row="6" Grid.Column="1" Text="=" Grid.ColumnSpan="3" Style="{StaticResource StyleOperateur}"  Command="{Binding EqualCommand}" />
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
